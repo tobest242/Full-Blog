@@ -1,5 +1,5 @@
 import app as app
-from flask import Flask, render_template, redirect, url_for, flash, abort
+from flask import Flask, render_template, redirect, url_for, flash, abort, app
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 from datetime import date
@@ -64,7 +64,7 @@ class User(UserMixin, db.Model):
     comments = relationship("Comment", back_populates="comment_author")
 
 
-db.create_all()
+# db.create_all()
 
 
 class BlogPost(db.Model):
@@ -78,7 +78,7 @@ class BlogPost(db.Model):
     body = db.Column(db.Text, nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
     comments = relationship("Comment", back_populates="parent_post")
-db.create_all()
+# db.create_all()
 
 class Comment(db.Model):
     __tablename__ = "comments"
@@ -88,7 +88,7 @@ class Comment(db.Model):
     parent_post = relationship("BlogPost", back_populates="comments")
     comment_author = relationship("User", back_populates="comments")
     body = db.Column(db.Text, nullable=False)
-db.create_all()
+# db.create_all()
 
 
 
